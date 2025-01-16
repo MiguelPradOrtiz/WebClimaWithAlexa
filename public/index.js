@@ -3,7 +3,9 @@ async function getWeather() {
     const weatherDataDiv = document.getElementById('weatherData');
   
     try {
-      const response = await fetch(`/api/weather?city=${city}`);
+        const API_KEY = '00e5c67638d2478a92e193543251601'; 
+        const API_URL = `https://api.weatherapi.com/v1/current.json`;
+      const response = await fetch(`${API_URL}&key=[${API_KEY}]&q=${city}`);
       if (!response.ok) {
         throw new Error('Error al obtener el clima');
       }
