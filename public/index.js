@@ -3,7 +3,7 @@ async function getWeather() {
     const weatherDataDiv = document.getElementById('weatherData');
   
     try {
-        const API_KEY = '00e5c67638d2478a92e193543251601'; 
+        const API_KEY = 'a0a47431af344929a37220252251601'; 
         const API_URL = `https://api.weatherapi.com/v1/current.json`;
       const response = await fetch(`${API_URL}?key=${API_KEY}&q=${city}`);
       if (!response.ok) {
