@@ -14,9 +14,9 @@ async function getWeather() {
   
       // Formatea y muestra los datos relevantes
       weatherDataDiv.innerHTML = `
-        <p><strong>Ciudad:</strong> ${data.name || 'N/A'}</p>
-        <p><strong>Temperatura:</strong> ${data.temp_c || 'N/A'}°C</p>
-        <p><strong>Condiciones:</strong> ${data.condition || 'N/A'}</p>
+        <p><strong>Ciudad:</strong> ${data.location.name}</p>
+        <p><strong>Temperatura:</strong> ${data.current.temp_c}°C</p>
+        <p><strong>Condiciones:</strong> ${data.current.condition.text}</p>
       `;
     } catch (error) {
       weatherDataDiv.innerHTML = `Error al obtener el clima: ${error.message}`;
