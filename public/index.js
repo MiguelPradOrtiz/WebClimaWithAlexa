@@ -1,28 +1,22 @@
-
 async function getWeather() {
-  const city = document.getElementById('cityInput').value;
-
-  if (!city) {
-      alert("Por favor, ingresa una ciudad.");
-      return;
-  }
-
-  try {
-      const response = await fetch(`/api/weather?city=${encodeURIComponent(city)}`);
-      const data = await response.json();
-
-      if (data.error) {
-          document.getElementById('weatherData').innerHTML = `<p>${data.error}</p>`;
-      } else {
-          // Mostramos la información del clima
-          document.getElementById('weatherData').innerHTML = `
-              <p><strong>Ubicación:</strong> ${data.location}</p>
-              <p><strong>Temperatura:</strong> ${data.temperature}°C</p>
-              <p><strong>Condición:</strong> ${data.condition}</p>
-          `;
+    const city = document.getElementById('cityInput').value;
+    const weatherDataDiv = document.getElementById('weatherData');
+  
+    try {
+      const response = await fetch(`/api/weather?city=${city}`);
+      if (!response.ok) {
+        throw new Error('Error al obtener el clima');
       }
-  } catch (error) {
-      console.error("Error al obtener el clima:", error);
-      document.getElementById('weatherData').innerHTML = `<p>Hubo un error al obtener el clima. Intenta de nuevo.</p>`;
+  
+      const data = await response.json();
+  
+      // Formatea y muestra los datos relevantes
+      weatherDataDiv.innerHTML = `
+        <p><strong>Ciudad:</strong> ${data.city || 'N/A'}</p>
+        <p><strong>Temperatura:</strong> ${data.temperature || 'N/A'}°C</p>
+        <p><strong>Condiciones:</strong> ${data.conditions || 'N/A'}</p>
+      `;
+    } catch (error) {
+      weatherDataDiv.innerHTML = `Error al obtener el clima: ${error.message}`;
+    }
   }
-}
